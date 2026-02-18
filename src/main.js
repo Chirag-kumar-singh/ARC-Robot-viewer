@@ -46,10 +46,17 @@ class App {
         this.angleUnit = 'rad';
     }
 
+    
+
     /**
      * Initialize application
      */
     async init() {
+        const params = new URLSearchParams(window.location.search);
+        const robotType = params.get('robot') || 'go2';
+
+        console.log('[VIEWER] Robot type:', robotType);
+
         try {
             // Initialize internationalization
             i18n.init();
@@ -64,41 +71,59 @@ class App {
             this.sceneManager = new SceneManager(canvas);
             window.sceneManager = this.sceneManager; // For debugging
 
-                        // 🔽 AUTO-LOAD Go2 URDF FROM public/ (CORRECT way)
+            const robotConfigs = {
+            go2: {
+                urdf: '/go2_description/urdf/go2_description.urdf',
+                root: '/go2_description/',
+                fakePath: 'urdf/go2_description.urdf'
+            },
+            gini: {
+                urdf: '/gini_description/urdf/sentience_gz.urdf',
+                root: '/gini_description/',
+                fakePath: 'urdf/sentience_gz.urdf'
+            },
+            g1: {
+                urdf: '/g1_description/urdf/g1.urdf',
+                root: '/g1_description/',
+                fakePath: 'urdf/g1.urdf'
+            }
+        };
+
+            // 🔽 AUTO-LOAD Go2 URDF FROM public/ (CORRECT way)
             console.log('AUTOLOAD BLOCK REACHED');
             try {
-                const URDF_URL = '/go2_description/urdf/go2_description.urdf';
-                const ROOT_PATH = '/go2_description/';
+                let config = robotConfigs[robotType];
 
-                console.log('[AUTOLOAD] Fetching Go2 URDF text');
+            if (!config) {
+                console.warn(`[VIEWER] Unknown robot "${robotType}", falling back to go2`);
+                config = robotConfigs["go2"];
+            }
 
-                const resp = await fetch(URDF_URL);
+
+                const resp = await fetch(config.urdf);
                 if (!resp.ok) {
                     throw new Error(`Failed to fetch URDF: ${resp.status}`);
                 }
 
                 const urdfText = await resp.text();
-
-                // 🔴 THIS IS THE MISSING PIECE
                 this.TEMPLATE_URDF_TEXT = urdfText;
 
-                console.log('[AUTOLOAD] Parsing Go2 URDF');
-
                 const model = await ModelLoaderFactory.loadModel(
-                    'urdf',                         // model type
-                    urdfText,                      // ✅ REQUIRED
-                    'urdf/go2_description.urdf',   // fake filename for relative paths
-                    null,                           // no fileMap (URL mode)
-                    null,                           // no File object
+                    'urdf',
+                    urdfText,
+                    config.fakePath,
+                    null,
+                    null,
                     {
-                        rootPath: ROOT_PATH         // 🔑 mesh/dae resolution
+                        rootPath: config.root
                     }
                 );
 
                 this.sceneManager.addModel(model);
                 this.currentModel = model;
 
-                console.log('[AUTOLOAD] Go2 loaded successfully');
+                console.log(`[AUTOLOAD] ${robotType} loaded successfully`);
+
 
                                 // Try to color FL_hip link RED
                 const linkName = 'FL_hip';
