@@ -2585,10 +2585,10 @@
     <color rgba="0.46275 0.28235 0.10588 1.00000"/>
   </material>
   <material name="Material.008">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
+    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
   </material>
   <material name="Material.012">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
+    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
   </material>
   <material name="Material.016">
     <color rgba="0.01569 0.01569 0.02745 1.00000"/>
@@ -2597,10 +2597,10 @@
     <color rgba="1.00000 1.00000 1.00000 1.00000"/>
   </material>
   <material name="Material.026">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
+    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
   </material>
   <material name="Material.031">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
+    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
   </material>
   <material name="Material.035">
     <color rgba="1.00000 1.00000 1.00000 1.00000"/>
@@ -2609,19 +2609,19 @@
     <color rgba="1.00000 1.00000 1.00000 1.00000"/>
   </material>
   <material name="Material.044">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
+    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
   </material>
   <material name="Material.046">
     <color rgba="1.00000 1.00000 1.00000 1.00000"/>
   </material>
   <material name="Material.047">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
+    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
   </material>
   <material name="Material.238">
     <color rgba="0.76078 0.75686 0.80000 1.00000"/>
   </material>
   <material name="Material.239">
-    <color rgba="0.00000 0.00000 0.00000 1.00000"/>
+    <color rgba="1.00000 1.00000 1.00000 1.00000"/>
   </material>
   <material name="Material.254">
     <color rgba="0.01569 0.01569 0.02745 1.00000"/>

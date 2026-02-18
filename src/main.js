@@ -53,7 +53,7 @@ class App {
      */
     async init() {
         const params = new URLSearchParams(window.location.search);
-        const robotType = params.get('robot') || 'go2';
+        const robotType = params.get('robot') || 'gini';
 
         console.log('[VIEWER] Robot type:', robotType);
 
