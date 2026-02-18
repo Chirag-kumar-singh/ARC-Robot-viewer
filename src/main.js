@@ -78,8 +78,8 @@ class App {
                 fakePath: 'urdf/go2_description.urdf'
             },
             gini: {
-                urdf: '/gini_description/urdf/sentience_gz.urdf',
-                root: '/gini_description/',
+                urdf: '/sentience_gz/urdf/sentience_gz.urdf',
+                root: '/sentience_gz/',
                 fakePath: 'urdf/sentience_gz.urdf'
             },
             g1: {
