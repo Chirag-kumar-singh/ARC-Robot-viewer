@@ -807,7 +807,7 @@ class App {
         const floatingPanel = document.getElementById('floating-model-tree');
 
         if (toggleBtn && floatingPanel) {
-            floatingPanel.style.display = 'flex';
+            floatingPanel.style.display = 'none';
             toggleBtn.classList.add('active');
         }
 
