@@ -26,7 +26,7 @@ window.d3 = d3;
 window.i18n = i18n;
 
 // Application state
-console.log('APP INIT STARTED');    
+console.log('APP INIT STARTED');
 class App {
     constructor() {
         this.sceneManager = null;
@@ -46,14 +46,14 @@ class App {
         this.angleUnit = 'rad';
     }
 
-    
+
 
     /**
      * Initialize application
      */
     async init() {
         const params = new URLSearchParams(window.location.search);
-        const robotType = params.get('robot') || 'gini';
+        const robotType = params.get('robot') || 'g1';
 
         console.log('[VIEWER] Robot type:', robotType);
 
@@ -72,32 +72,32 @@ class App {
             window.sceneManager = this.sceneManager; // For debugging
 
             const robotConfigs = {
-            go2: {
-                urdf: '/go2_description/urdf/go2_description.urdf',
-                root: '/go2_description/',
-                fakePath: 'urdf/go2_description.urdf'
-            },
-            gini: {
-                urdf: '/sentience_gz/urdf/sentience_gz.urdf',
-                root: '/sentience_gz/',
-                fakePath: 'urdf/sentience_gz.urdf'
-            },
-            g1: {
-                urdf: '/g1_description/urdf/g1.urdf',
-                root: '/g1_description/',
-                fakePath: 'urdf/g1.urdf'
-            }
-        };
+                go2: {
+                    urdf: '/go2_description/urdf/go2_description.urdf',
+                    root: '/go2_description/',
+                    fakePath: 'urdf/go2_description.urdf'
+                },
+                gini: {
+                    urdf: '/sentience_gz/urdf/sentience_gz.urdf',
+                    root: '/sentience_gz/',
+                    fakePath: 'urdf/sentience_gz.urdf'
+                },
+                g1: {
+                    urdf: '/g1_description/urdf/g1_29dof.urdf',
+                    root: '/g1_description/',
+                    fakePath: 'urdf/g1_29dof.urdf'
+                }
+            };
 
             // 🔽 AUTO-LOAD Go2 URDF FROM public/ (CORRECT way)
             console.log('AUTOLOAD BLOCK REACHED');
             try {
                 let config = robotConfigs[robotType];
 
-            if (!config) {
-                console.warn(`[VIEWER] Unknown robot "${robotType}", falling back to go2`);
-                config = robotConfigs["go2"];
-            }
+                if (!config) {
+                    console.warn(`[VIEWER] Unknown robot "${robotType}", falling back to go2`);
+                    config = robotConfigs["go2"];
+                }
 
 
                 const resp = await fetch(config.urdf);
@@ -125,7 +125,7 @@ class App {
                 console.log(`[AUTOLOAD] ${robotType} loaded successfully`);
 
 
-                                // Try to color FL_hip link RED
+                // Try to color FL_hip link RED
                 const linkName = 'FL_hip';
 
                 if (this.currentModel.links.has(linkName)) {
@@ -342,7 +342,7 @@ class App {
         }
     }
 
-     runEcho() {
+    runEcho() {
         console.log('[ECHO] Running dummy echo');
 
         const activeLinks = [
@@ -418,8 +418,8 @@ class App {
     }
 
     resetToNeutral() {
-    console.log('[ECHO] Resetting to neutral URDF');
-    this.loadURDFFromText(this.TEMPLATE_URDF_TEXT);
+        console.log('[ECHO] Resetting to neutral URDF');
+        this.loadURDFFromText(this.TEMPLATE_URDF_TEXT);
     }
 
 

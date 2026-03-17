@@ -101,7 +101,7 @@ export class ModelLoaderFactory {
     static async loadModel(fileType, content, fileName, fileMap = null, file = null, options = {}) {
         switch (fileType) {
             case 'urdf':
-                return await this.loadURDF(content, fileName, fileMap, file);
+                return await this.loadURDF(content, fileName, fileMap, file, options);
             case 'mjcf':
                 return await this.loadMJCF(content, fileMap);
             case 'usd':
@@ -118,7 +118,7 @@ export class ModelLoaderFactory {
      * @param {Map} fileMap - File map
      * @param {File} file - Original file object (optional)
      */
-    static async loadURDF(content, fileName, fileMap = null, file = null) {
+    static async loadURDF(content, fileName, fileMap = null, file = null, options = {}) {
         // Dynamically import urdf-loader
         let URDFLoader;
         try {
@@ -133,6 +133,13 @@ export class ModelLoaderFactory {
 
             // Enable collision parsing
             loader.parseCollision = true;
+
+            // If a rootPath is provided (used when loading from public/ without a fileMap),
+            // set it as the workingPath so urdf-loader resolves relative mesh paths
+            // (e.g. "meshes/pelvis.STL") against the correct server-hosted directory.
+            if (options.rootPath) {
+                loader.workingPath = options.rootPath;
+            }
 
             // Extract directory where URDF file is located (workingPath)
             // fileName might be "e3.urdf" or "e3_v2/e3.urdf"
