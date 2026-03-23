@@ -137,8 +137,20 @@ export class ModelLoaderFactory {
             // If a rootPath is provided (used when loading from public/ without a fileMap),
             // set it as the workingPath so urdf-loader resolves relative mesh paths
             // (e.g. "meshes/pelvis.STL") against the correct server-hosted directory.
+            // Also set loader.packages so that package:// URIs (e.g. used by mycobot)
+            // are correctly resolved.  urdf-loader resolves package://pkg/rel/path as:
+            //   packages[pkg] + '/' + rel/path
+            // So for rootPath = '/mycobot_description/', packages['mycobot_description']
+            // must be '/mycobot_description' (no trailing slash).
             if (options.rootPath) {
                 loader.workingPath = options.rootPath;
+
+                // Derive the package name from the rootPath (strip leading/trailing slashes)
+                const pkgName = options.rootPath.replace(/^\/|\/$/g, ''); // e.g. 'mycobot_description'
+                if (pkgName) {
+                    // Map the package name to its public-root path (no trailing slash)
+                    loader.packages = { [pkgName]: `/${pkgName}` };
+                }
             }
 
             // Extract directory where URDF file is located (workingPath)

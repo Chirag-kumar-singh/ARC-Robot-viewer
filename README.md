@@ -31,7 +31,7 @@ This project uses **pnpm**, but you can also use **npm** or **yarn**.
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/fan-ziqi/robot_viewer.git
+git clone 
 cd robot_viewer
 pnpm install
 ```

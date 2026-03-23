@@ -53,7 +53,7 @@ class App {
      */
     async init() {
         const params = new URLSearchParams(window.location.search);
-        const robotType = params.get('robot') || 'g1';
+        const robotType = params.get('robot') || 'mycobot';
 
         console.log('[VIEWER] Robot type:', robotType);
 
@@ -86,6 +86,11 @@ class App {
                     urdf: '/g1_description/urdf/g1_29dof.urdf',
                     root: '/g1_description/',
                     fakePath: 'urdf/g1_29dof.urdf'
+                },
+                mycobot: {
+                    urdf: '/mycobot_description/urdf/mycobot_280_m5.urdf',
+                    root: '/mycobot_description/',
+                    fakePath: 'urdf/mycobot_280_m5.urdf'
                 }
             };
 
